@@ -15,3 +15,15 @@ body {
 red {
   color: red;
 }
+
+#sidebar {
+  width: auto;
+}
+
+#chbSidebar:checked + #sidebar {
+  width: 5rem;
+}
+
+#chbSidebar:checked + #sidebar ._toggle {
+  display: none;
+}
