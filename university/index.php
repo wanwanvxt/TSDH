@@ -56,7 +56,7 @@
           <i class="bi bi-house"></i>
           <span class="ms-2 _toggle">Trang chủ</span>
         </a>
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="./student-list.php">
           <i class="bi bi-list-stars"></i>
           <span class="ms-2 _toggle">Danh sách tuyển sinh</span>
         </a>
@@ -123,6 +123,7 @@
           </form>
           <hr />
         </div>
+
         <!--  -->
         <table class="table table-striped-columns">
           <thead>

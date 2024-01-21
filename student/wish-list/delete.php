@@ -11,25 +11,23 @@
   <?php
   require_once("../../includes/users.php");
 
-  if (!isLoggedInAsUniversity()) {
+  if (!isLoggedInAsStudent()) {
     header("location:../login.php");
     exit();
   }
 
-  require_once("../../includes/majors.php");
-  require_once("../../includes/universities.php");
+  require_once("../../includes/wishes.php");
 
-  $univerId = getUniverId($_COOKIE["user"]);
-  $majorId = $_GET["major_id"];
+  $wishId = $_GET["wish_id"];
 
-  if (deleteMajorByUniver($majorId, $univerId)) {
-    echo "<script>alert('Xoá ngành thành công!')</script>";
+  if (deleteWish($wishId)) {
+    echo "<script>alert('Xoá nguyện vọng thành công!')</script>";
   } else {
-    echo "<script>alert('Xoá ngành không thành công!')</script>";
+    echo "<script>alert('Xoá nguyện vọng không thành công!')</script>";
   }
   ?>
   <script>
-    window.location.href = '../index.php';
+    window.location.href = './index.php';
   </script>
 
 </body>

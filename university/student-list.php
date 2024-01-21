@@ -2,8 +2,8 @@
 
 <head>
   <link rel="icon" href="../assets/img/logo.png">
-  <title>Thay đổi mật khẩu | Trường đại học</title>
-  <link rel="stylesheet" href="../assets/css/main.css" />
+  <title>Trang chủ | Trường đại học</title>
+  <link rel="stylesheet" href="../assets/css/main.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -14,20 +14,6 @@
   if (!isLoggedInAsUniversity()) {
     header("location:login.php");
     exit();
-  }
-
-  $username = $_COOKIE["user"];
-  if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $password = $_POST["txtPassword"];
-    $rePassword = $_POST["txtRePassword"];
-
-    if ($password == $rePassword) {
-      if (updatePassword($username, $password)) {
-        echo "<script>alert('Thay đổi mật khẩu thành công!')</script>";
-      }
-    } else {
-      echo "<script>alert('Mật khẩu không trùng khớp!')</script>";
-    }
   }
   ?>
 
@@ -49,11 +35,11 @@
           <i class="bi bi-house"></i>
           <span class="ms-2 _toggle">Trang chủ</span>
         </a>
-        <a class="nav-link" href="./student-list.php">
+        <a class="nav-link active" href="./student-list.php">
           <i class="bi bi-list-stars"></i>
           <span class="ms-2 _toggle">Danh sách tuyển sinh</span>
         </a>
-        <a class="nav-link active" href="./change-password.php">
+        <a class="nav-link" href="./change-password.php">
           <i class="bi bi-person-lock"></i>
           <span class="ms-2 _toggle">Thay đổi mật khẩu</span>
         </a>
@@ -66,28 +52,16 @@
         </a>
       </div>
     </div>
-    </div>
 
     <div class="flex-fill d-flex flex-column">
       <!-- header -->
       <div class="container-fluid bg-light-subtle m-0 row justify-content-between align-items-center border-bottom" style="height: 4rem">
-        <h3 class="col m-0">Thay đổi mật khẩu</h3>
+        <h3 class="col m-0">Danh sách tuyển sinh</h3>
       </div>
 
       <!-- content -->
       <div class="h-100 w-100 p-3 bg-light-subtle">
-        <h5>Tài khoản: <?php echo $username ?></h5>
-        <form action="change-password.php" style="max-width: 30rem" method="POST">
-          <div class="mb-3">
-            <label class="form-label">Mật khẩu mới: <red>*</red></label>
-            <input class="form-control" type="password" name="txtPassword" required />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Nhập lại mật khẩu mới: <red>*</red></label>
-            <input class="form-control" type="password" name="txtRePassword" required />
-          </div>
-          <button class="btn btn-success" type="submit">Xác nhận</button>
-        </form>
+
       </div>
     </div>
   </main>

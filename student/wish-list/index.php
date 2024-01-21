@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <link rel="icon" href="../assets/img/logo.png">
+  <link rel="icon" href="../../assets/img/logo.png">
   <title>Nguyện vọng | Học sinh</title>
   <link rel="stylesheet" href="../../assets/css/main.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -25,6 +25,24 @@
   }
 
   $wishList = getWishListByStudent($_COOKIE["user"]);
+
+  require_once("../../includes/universities.php");
+  $univerList = getUniverList();
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userId = $_COOKIE["user"];
+    $univerId = $_POST["selUniver"];
+    $majorId = $_POST["selMajor"];
+
+    require_once("../../includes/wishes.php");
+    if (addWish($userId, $univerId, $majorId)) {
+      echo "<script>alert('Thêm nguyện vọng thành công!')</script>";
+      header("refresh:0");
+      exit();
+    } else {
+      echo "<script>alert('Thêm nguyện vọng không thành công!')</script>";
+    }
+  }
   ?>
 
   <main class="container-fluid px-0 d-flex" style="min-height: 100vh">
@@ -77,6 +95,67 @@
       <div class="h-100 w-100 p-3 bg-light-subtle">
         <h5 class="text-primary">DANH SÁCH NGUYỆN VỌNG</h5>
         <!--  -->
+
+        <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapse">
+          Thêm nguyện vọng
+        </button>
+        <div id="collapse" class="collapse">
+          <form action="index.php" method="POST" style="max-width: 30rem;">
+            <div class="mb-3">
+              <label class="form-label">Trường đại học: <red>*</red></label>
+              <select id="selUniver" class="form-select" name="selUniver" required onchange="matchSel(this.value)">
+                <option value="">-Chọn trường đại học-</option>
+                <?php while ($univer = $univerList->fetch_assoc()) { ?>
+                  <option value="<?php echo $univer["id"] ?>"><?php echo $univer["id"] . " - " . $univer["name"] ?></option>
+                <?php } ?>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Ngành đăng ký: <red>*</red></label>
+              <select id="selMajor" class="form-select" name="selMajor" required>
+                <option value="">-Chọn ngành-</option>
+                <?php
+                $univerList = getUniverList();
+                require_once("../../includes/majors.php");
+                while ($univer = $univerList->fetch_assoc()) {
+                  $majorByUniver = getMajorListByUniver($univer["id"]);
+                  while ($major = $majorByUniver->fetch_assoc()) {
+                ?>
+                    <option data-option="<?php echo $univer["id"] ?>" value="<?php echo $major["major_id"] ?>"><?php echo $major["major_id"] . " - " . $major["name"] ?></option>
+                <?php
+                  }
+                }
+                ?>
+              </select>
+
+            </div>
+
+            <script>
+              const selUniver = document.querySelector('#selUniver');
+              const selMajor = document.querySelector('#selMajor');
+              const majorOptions = selMajor.querySelectorAll('option');
+
+              function matchSel(value) {
+                selMajor.innerHTML = '<option value="">-Chọn ngành-</option>';
+                majorOptions.forEach(opt => {
+                  if (opt.dataset.option === value) {
+                    selMajor.appendChild(opt);
+                  }
+                });
+              }
+
+              matchSel(selUniver.value);
+            </script>
+
+            <button class="btn btn-success" type="submit">Thêm</button>
+            <button class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapse">
+              Huỷ
+            </button>
+          </form>
+          <hr />
+        </div>
+
+        <!--  -->
         <table class="table table-striped-columns">
           <thead>
             <tr class="table-primary">
@@ -97,7 +176,6 @@
                 <td><?php echo $wish["block"] ?></td>
                 <td><input class="form-check-input" type="checkbox" disabled> <?php echo $wish["result"] ?></td>
                 <td>
-                  <a class="btn btn-warning" href="./update.php?wish_id=<?php echo $wish["wish_id"] ?>">Sửa</a>
                   <a class="btn btn-danger" href="./delete.php?wish_id=<?php echo $wish["wish_id"] ?>" onclick="return confirm('Chắc chắn muốn xoá nguyện vọng này chứ?')">Xoá</a>
                 </td>
               </tr>

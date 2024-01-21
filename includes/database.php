@@ -45,4 +45,9 @@ class database
 
     return $this->conn->query($sql);
   }
+
+  function getAffectedRowId()
+  {
+    return $this->conn->insert_id;
+  }
 }
