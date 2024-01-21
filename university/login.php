@@ -2,7 +2,7 @@
 
 <head>
   <link rel="icon" href="../assets/img/logo.png">
-  <title>Đăng nhập | Học sinh</title>
+  <title>Đăng nhập | Trường đại học</title>
   <link rel="stylesheet" href="../assets/css/main.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -19,7 +19,7 @@
       $keepLogin = true;
     }
 
-    if (loginAsStudent($username, $password, $keepLogin)) {
+    if (loginAsUniversity($username, $password, $keepLogin)) {
       header("location:index.php");
       exit();
     } else {
@@ -37,7 +37,7 @@
     </a>
     <div class="container p-5 bg-white rounded">
       <h3 class="m-0 fw-bold text-center">ĐĂNG NHẬP</h3>
-      <p class="text-center text-primary">(với tư cách là học sinh)</p>
+      <p class="text-center text-primary">(với tư cách là trường đại học)</p>
 
       <form action="login.php" method="post">
         <div class="mb-3">

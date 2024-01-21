@@ -2,7 +2,7 @@
 
 <head>
   <link rel="icon" href="../assets/img/logo.png">
-  <title>Thay đổi mật khẩu | Học sinh</title>
+  <title>Thay đổi mật khẩu | Trường đại học</title>
   <link rel="stylesheet" href="../assets/css/main.css" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -11,7 +11,7 @@
   <?php
   require_once("../includes/users.php");
 
-  if (!isLoggedInAsStudent()) {
+  if (!isLoggedInAsUniversity()) {
     header("location:login.php");
     exit();
   }
@@ -49,13 +49,9 @@
           <i class="bi bi-house"></i>
           <span class="ms-2 _toggle">Trang chủ</span>
         </a>
-        <a class="nav-link" href="./wish-list/index.php">
+        <a class="nav-link" href="#">
           <i class="bi bi-list-stars"></i>
-          <span class="ms-2 _toggle">Nguyện vọng</span>
-        </a>
-        <a class="nav-link" href="./info.php">
-          <i class="bi bi-person-bounding-box"></i>
-          <span class="ms-2 _toggle">Thông tin cá nhân</span>
+          <span class="ms-2 _toggle">Danh sách tuyển sinh</span>
         </a>
         <a class="nav-link active" href="./change-password.php">
           <i class="bi bi-person-lock"></i>

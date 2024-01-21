@@ -15,7 +15,7 @@
       </h1>
       <h4 class="text-center text-primary">Truy cập với tư cách là:</h4>
       <a class="btn btn-success" href="./student/index.php">Học sinh</a>
-      <a class="btn btn-success" href="#">Trường đại học</a>
+      <a class="btn btn-success" href="./university/index.php">Trường đại học</a>
     </div>
   </main>
 </body>
