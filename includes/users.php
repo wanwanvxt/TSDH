@@ -103,7 +103,7 @@ function register($username, $password)
 {
   $db = new database();
   // tao mot tai khoan moi trong bang users
-  return $db->execute("INSERT INTO Users (username,password,admin) VALUES (?,?,?)", "ssi", $username, $password, 0);
+  return $db->execute("INSERT INTO users (username,password,admin) VALUES (?,?,?)", "ssi", $username, $password, 0);
 }
 function registerAsStudent($username, $password)
 {
