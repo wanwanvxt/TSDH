@@ -174,9 +174,19 @@
                 <td><?php echo $wish["major_id"] . " - " . $wish["major_name"] ?></td>
                 <td><?php echo $wish["univer_id"] . " - " . $wish["univer_name"] ?></td>
                 <td><?php echo $wish["block"] ?></td>
-                <td><input class="form-check-input" type="checkbox" disabled> <?php echo $wish["result"] ?></td>
                 <td>
-                  <a class="btn btn-danger" href="./delete.php?wish_id=<?php echo $wish["wish_id"] ?>" onclick="return confirm('Chắc chắn muốn xoá nguyện vọng này chứ?')">Xoá</a>
+                  <?php if ($wish["result"] === 1) { ?>
+                    <i class="bi bi-check-square-fill text-success"></i>
+                  <?php } elseif ($wish["result"] === 0) { ?>
+                    <i class="bi bi-x-square-fill text-danger"></i>
+                  <?php } else { ?>
+                    <i class="bi bi-dash-square-fill text-primary"></i>
+                  <?php } ?>
+                </td>
+                <td>
+                  <?php if ($wish["result"] !== 1 && $wish["result"] !== 0) { ?>
+                    <a class="btn btn-danger" href="./delete.php?wish_id=<?php echo $wish["wish_id"] ?>" onclick="return confirm('Chắc chắn muốn xoá nguyện vọng này chứ?')">Xoá</a>
+                  <?php } ?>
                 </td>
               </tr>
             <?php } ?>

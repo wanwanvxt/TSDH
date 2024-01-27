@@ -23,12 +23,11 @@
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $birthday = $_POST["birthday"];
-    $block = $_POST["block"];
     $email = $_POST["email"];
     $phone = $_POST["phone"];
     $address = $_POST["address"];
 
-    if (updateStudentInfo($_COOKIE["user"], $name, $birthday, $block, $email, $phone, $address)) {
+    if (updateStudentInfo($_COOKIE["user"], $name, $birthday, $email, $phone, $address)) {
       echo "<script>alert('Thay đổi thông tin thành công!')</script>";
       header("refresh:0");
       exit();
@@ -96,10 +95,6 @@
           <div class="mb-3">
             <label class="form-label">Ngày sinh: <red>*</red></label>
             <input class="form-control" type="date" name="birthday" max="<?php echo date('Y') - 15 ?>-12-31" value="<?php echo $student['birthday'] ?>" required />
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Khối thi: <red>*</red></label>
-            <input class="form-control" type="text" name="block" value="<?php echo $student['block'] ?>" required />
           </div>
           <div class="mb-3">
             <label class="form-label">Email: <red>*</red></label>

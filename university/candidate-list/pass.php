@@ -9,21 +9,23 @@
   <?php
   require_once("../../includes/users.php");
 
-  if (!isLoggedInAsStudent()) {
+  if (!isLoggedInAsUniversity()) {
     header("location:../login.php");
     exit();
   }
 
   require_once("../../includes/wishes.php");
 
+  $result = $_GET["pass"];
   $wishId = $_GET["wish_id"];
 
-  if (deleteWish($wishId)) {
-    echo "<script>alert('Xoá nguyện vọng thành công!')</script>";
+  if (updateResult($result, $wishId)) {
+    echo "<script>alert('Xác nhận thành công!')</script>";
   } else {
-    echo "<script>alert('Xoá nguyện vọng không thành công!')</script>";
+    echo "<script>alert('Xác nhận không thành công!')</script>";
   }
   ?>
+
   <script>
     window.location.href = './index.php';
   </script>

@@ -49,9 +49,9 @@
           <i class="bi bi-house"></i>
           <span class="ms-2 _toggle">Trang chủ</span>
         </a>
-        <a class="nav-link" href="./student-list.php">
+        <a class="nav-link" href="./candidate-list/index.php">
           <i class="bi bi-list-stars"></i>
-          <span class="ms-2 _toggle">Danh sách tuyển sinh</span>
+          <span class="ms-2 _toggle">Tuyển sinh</span>
         </a>
         <a class="nav-link active" href="./change-password.php">
           <i class="bi bi-person-lock"></i>

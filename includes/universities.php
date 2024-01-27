@@ -29,3 +29,10 @@ function getUniverId($username)
   $univerInfo = $result->fetch_assoc();
   return $univerInfo["id"];
 }
+
+function getCandidateList($univer_id)
+{
+  // wish_id, name, birthday, address, result
+  $db = new database();
+  return $db->execute("SELECT wishes.id as wish_id, students.name, students.birthday, students.address, wishes.result FROM students JOIN wishes ON students.user_id = wishes.user_id JOIN u_m ON wishes.um_id = u_m.id WHERE u_m.univer_id = ?", "s", $univer_id);
+}

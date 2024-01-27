@@ -16,3 +16,9 @@ function deleteWish($wish_id)
   $db = new database();
   return $db->execute("delete from wishes where id=?", "s", $wish_id);
 }
+
+function updateResult($result, $wish_id)
+{
+  $db = new database();
+  return $db->execute("update wishes set result=? where id=?", "ii", $result, $wish_id);
+}

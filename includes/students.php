@@ -7,10 +7,10 @@ function getStudentInfo($user_id)
   return $db->execute("SELECT * FROM Students WHERE user_id = ?", "s", $user_id);
 }
 
-function updateStudentInfo($user_id, $name, $birthday, $block, $email, $phone, $address)
+function updateStudentInfo($user_id, $name, $birthday, $email, $phone, $address)
 {
   $db = new database();
-  return $db->execute("UPDATE Students SET name = ?, birthday = ?, block = ?, email = ?, phone = ?, address = ? WHERE user_id = ?", "sssssss", $name, $birthday, $block, $email, $phone, $address, $user_id);
+  return $db->execute("UPDATE Students SET name = ?, birthday = ?, email = ?, phone = ?, address = ? WHERE user_id = ?", "sssssss", $name, $birthday, $email, $phone, $address, $user_id);
 }
 
 function studentInfoIsEmpty($user_id)
