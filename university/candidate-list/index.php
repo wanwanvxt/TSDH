@@ -72,17 +72,19 @@
               <th>Họ tên</th>
               <th>Ngày sinh</th>
               <th>Địa chỉ</th>
+							<td>Ngành đăng ký</td>
               <th>Kết quả</th>
               <th>Hành động</th>
             </tr>
           </thead>
           <tbody>
             <?php while ($candidate = $candidateList->fetch_assoc()) { ?>
-              <!-- wish_id, name, birthday, address, result -->
+              <!-- wish_id, name, birthday, address, major_id, major_name, result -->
               <tr>
                 <td><?php echo $candidate["name"] ?></td>
                 <td><?php echo $candidate["birthday"] ?></td>
                 <td><?php echo $candidate["address"] ?></td>
+								<td><?php echo $candidate["major_id"] . " - " . $candidate["major_name"] ?></td>
                 <td>
                   <?php if ($candidate["result"] === 1) { ?>
                     <i class="bi bi-check-square-fill text-success"></i>

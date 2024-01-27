@@ -102,8 +102,13 @@ function loginAsUniversity($username, $password, $keepLogin)
 function register($username, $password)
 {
   $db = new database();
-  // tao mot tai khoan moi trong bang users
-  return $db->execute("INSERT INTO users (username,password,admin) VALUES (?,?,?)", "ssi", $username, $password, 0);
+
+  if (!validUser($username)) { //kiem tra tai khoan da co hay chua
+    // tao mot tai khoan moi trong bang users
+    return $db->execute("INSERT INTO users (username,password,admin) VALUES (?,?,?)", "ssi", $username, $password, 0);
+  }
+
+  return false;
 }
 function registerAsStudent($username, $password)
 {

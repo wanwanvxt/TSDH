@@ -10,7 +10,7 @@ function getStudentInfo($user_id)
 function updateStudentInfo($user_id, $name, $birthday, $email, $phone, $address)
 {
   $db = new database();
-  return $db->execute("UPDATE students SET name = ?, birthday = ?, email = ?, phone = ?, address = ? WHERE user_id = ?", "sssssss", $name, $birthday, $email, $phone, $address, $user_id);
+  return $db->execute("UPDATE students SET name = ?, birthday = ?, email = ?, phone = ?, address = ? WHERE user_id = ?", "ssssss", $name, $birthday, $email, $phone, $address, $user_id);
 }
 
 function studentInfoIsEmpty($user_id)

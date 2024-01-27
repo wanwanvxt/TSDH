@@ -10,7 +10,7 @@
 <body>
   <?php
   require_once("../includes/users.php");
-  
+
   if (!isLoggedInAsStudent()) {
     header("location:login.php");
     exit();
@@ -21,7 +21,7 @@
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $search = $_POST["txtSearch"];
-    $searchList = searchUniver($search);
+    $univerList = searchUniver($search);
   }
   ?>
 
@@ -87,29 +87,16 @@
             </tr>
           </thead>
           <tbody>
-            <!-- ds tim kiem -->
-            <?php if (isset($searchList)) {
-              while ($row = $searchList->fetch_assoc()) {
-            ?>
-                <tr>
-                  <td><?php echo $row["id"] ?></td>
-                  <td><a href="<?php echo $row["link"] ?>" target="_blank"><?php echo $row["name"] ?></a></td>
-                  <td><?php echo $row["address"] ?></td>
-                </tr>
-              <?php } ?>
-
-
-              <!-- tat ca -->
-              <?php } else {
-              while ($row = $univerList->fetch_assoc()) { ?>
-                <!-- id, name, address  -->
-                <tr>
-                  <td><?php echo $row["id"] ?></td>
-                  <td><a href="<?php echo $row["link"] ?>" target="_blank"><?php echo $row["name"] ?></a></td>
-                  <td><?php echo $row["address"] ?></td>
-                </tr>
-            <?php }
-            } ?>
+            <!-- hien thi ds cac truong -->
+            <?php
+            while ($row = $univerList->fetch_assoc()) { ?>
+              <!-- id, name, address, link  -->
+              <tr>
+                <td><?php echo $row["id"] ?></td>
+                <td><a href="<?php echo $row["link"] ?>" target="_blank"><?php echo $row["name"] ?></a></td>
+                <td><?php echo $row["address"] ?></td>
+              </tr>
+            <?php } ?>
           </tbody>
         </table>
       </div>
