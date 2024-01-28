@@ -13,9 +13,6 @@ function searchUniver($value)
   $value = "%" . $value . "%";
 
   $db = new database();
-  // = ... Đông
-  // like ... Đông Á
-  //select * from universities where name = %Đông% or id like %Đông%
   $result = $db->execute("select * from universities where name like ? or id like ?", "ss", $value, $value);
   return $result;
 }
