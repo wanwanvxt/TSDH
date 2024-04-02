@@ -1,66 +1,77 @@
-<html>
+<!DOCTYPE html>
+<html lang="vi">
 
 <head>
-  <link rel="icon" href="../assets/img/logo.png">
-  <title>Đăng nhập | Học sinh</title>
-  <link rel="stylesheet" href="../assets/css/main.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng nhập | Tuyển sinh đại học - Trường Đại học Công nghệ Đông Á</title>
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+  <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
   <?php
-  require_once("../includes/users.php");
-
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["txtUsername"];
-    $password = $_POST["txtPassword"];
+    require_once "../core/User.php";
+    require_once "../core/UserCtrl.php";
+
+    $email = $_POST["email"];
+    $password = $_POST["password"];
     $keepLogin = false;
-    if (isset($_POST["chbKeepLogin"])) {
+    if (isset($_POST["keepLogin"])) {
       $keepLogin = true;
     }
 
-    if (loginAsStudent($username, $password, $keepLogin)) {
-      header("location:index.php");
+    $isLoggedIn = UserCtrl::login($email, $password, $keepLogin);
+    if ($isLoggedIn) {
+      header("location: /student");
       exit();
     } else {
-      echo "<script>alert('Tài khoản hoặc mật khẩu không chính xác!')</script>";
+      echo "<script>alert('Sai email hoặc mật khẩu')</script>";
     }
   }
   ?>
 
-  <main class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; min-height: 100vh">
-    <a class="container mb-3 px-0 row" href="../index.php" style="text-decoration: none;">
-      <img class="col-2" src="../assets/img/logo.png" />
-      <h3 class="col-10 m-0 d-flex align-items-center text-white">
-        TUYỂN SINH<br />ĐẠI HỌC 2024
-      </h3>
-    </a>
-    <div class="container p-5 bg-white rounded">
-      <h3 class="m-0 fw-bold text-center">ĐĂNG NHẬP</h3>
-      <p class="text-center text-primary">(với tư cách là học sinh)</p>
+  <header class="text-primary p-3 mb-5 d-flex justify-content-center align-items-center">
+    <img src="/assets/img/eaut_brand.webp" alt="Trường Đại học Công nghệ Đông Á" width="120" />
+    <h3 class="m-0 ms-3 text-uppercase fw-bold">
+      Tuyển sinh đại học -<br />
+      Trường Đại học Công nghệ Đông Á
+    </h3>
+  </header>
 
-      <form action="login.php" method="post">
-        <div class="mb-3">
-          <label class="form-label">Tên tài khoản: <red>*</red></label>
-          <input class="form-control" type="text" name="txtUsername" required />
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Mật khẩu: <red>*</red></label>
-          <input class="form-control" type="password" name="txtPassword" required />
-        </div>
-        <div class="mb-5 form-check">
-          <input class="form-check-input" type="checkbox" name="chbKeepLogin">
-          <label class="form-label">Ghi nhớ đăng nhập</label>
-        </div>
-        <div class="d-flex flex-column gap-3">
-          <button class="btn btn-success" type="submit">Đăng nhập</button>
-          <p>
-            Chưa có tài khoản? <a href="./register.php">Đăng ký tại đây.</a>
-          </p>
-        </div>
+  <main class="mb-5 px-3 d-flex justify-content-center">
+    <div class="card p-3 bg-body-tertiary" style="width: 50rem">
+      <h3 class="fw-bold text-center">ĐĂNG NHẬP</h3>
+      <p class="text-center text-primary mb-5">(với tư cách là học sinh)</p>
+
+      <form class="d-flex flex-column gap-3" action="login.php" method="post">
+        <label class="form-label fw-medium">
+          Email <span class="text-danger">*</span>
+          <input class="form-control" type="email" name="email" required />
+        </label>
+        <label class="form-label fw-medium">
+          Mật khẩu <span class="text-danger">*</span>
+          <input class="form-control" type="password" name="password" required />
+        </label>
+        <label class="form-label">
+          <input class="form-check-input" type="checkbox" name="keepLogin">
+          Ghi nhớ đăng nhập
+        </label>
+        <button class="btn btn-success" type="submit">Đăng nhập</button>
+
+        <p>Chưa có tài khoản? <a href="/student/register.php">Đăng ký ngay</a></p>
       </form>
     </div>
   </main>
+
+  <footer>
+    <h4 class="text-center">
+      Bản quyền &copy;
+      <a href="https://eaut.edu.vn">Trường Đại học Công nghệ Đông Á</a>
+    </h4>
+  </footer>
+
 </body>
 
 </html>

@@ -1,24 +1,37 @@
-<html>
+<!DOCTYPE html>
+<html lang="vi">
 
 <head>
-  <link rel="icon" href="./assets/img/logo.png">
-  <title>Tuyển sinh đại học 2024</title>
-  <link rel="stylesheet" href="./assets/css/main.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tuyển sinh đại học - Trường Đại học Công nghệ Đông Á</title>
+  <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
+  <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
-  <main class="d-flex flex-column justify-content-center align-items-center" style="width: 100%; min-height: 100vh">
-    <div class="container p-5 bg-white rounded d-flex flex-column gap-3">
-      <h1 class="m-0 mb-3 text-center fw-bold">
-        TUYỂN SINH<br />ĐẠI HỌC 2024
-      </h1>
-      <h4 class="text-center text-primary">Truy cập với tư cách là:</h4>
-      <a class="btn btn-success" href="./student/index.php">Học sinh</a>
-      <a class="btn btn-success" href="./university/index.php">Trường đại học</a>
-      <a class="btn btn-warning" href="./admin/index.php">Admin</a>
+<body class="bg-light-subtle">
+  <header class="text-primary p-3 mb-5 d-flex justify-content-center align-items-center">
+    <img src="/assets/img/eaut_brand.webp" alt="Trường Đại học Công nghệ Đông Á" width="120" />
+    <h3 class="m-0 ms-3 text-uppercase fw-bold">
+      Tuyển sinh đại học -<br />
+      Trường Đại học Công nghệ Đông Á
+    </h3>
+  </header>
+
+  <main class="mb-5 px-3 d-flex justify-content-center">
+    <div class="card p-3" style="width: 50rem">
+      <h3 class="fw-bold text-center mb-3">Truy cập với tư cách là:</h3>
+      <a class="btn btn-success mb-3" href="/student">Học sinh</a>
+      <a class="btn btn-warning" href="/admin">Quản trị</a>
     </div>
   </main>
+
+  <footer>
+    <h4 class="text-center">
+      Bản quyền &copy;
+      <a href="https://eaut.edu.vn">Trường Đại học Công nghệ Đông Á</a>
+    </h4>
+  </footer>
 </body>
 
 </html>
