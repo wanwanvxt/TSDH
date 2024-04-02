@@ -48,6 +48,27 @@
 
   $wishList = WishCtrl::getWishListByStudent($studentProfile->id);
   $majorList = MajorCtrl::getMajorList();
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["addWish"])) {
+      $majorId = $_POST["majorId"];
+      $studentId = $studentProfile->id;
+
+      if (WishCtrl::addWish($majorId, $studentId)) {
+        echo "<script>alert('Thêm NV thành công');window.location.href='/student'</script>";
+      } else {
+        echo "<script>alert('Thêm NV không thành công')</script>";
+      }
+    } elseif (isset($_POST["deleteWish"])) {
+      $wishId = $_POST["wishId"];
+
+      if (WishCtrl::deleteWish($wishId)) {
+        echo "<script>alert('Xoá NV thành công');window.location.href='/student/wishlist.php'</script>";
+      } else {
+        echo "<script>alert('Xoá NV không thành công')</script>";
+      }
+    }
+  }
   ?>
 
   <nav class="fixed-top navbar navbar-expand-lg bg-primary-subtle shadow-sm">
@@ -96,22 +117,12 @@
           <option value="" selected>-Chọn ngành-</option>
           <?php
           foreach ($majorList as $major) {
-            if ($wishList == null) {
+            if (!WishCtrl::studentHasWish($studentProfile->id, $major->id)) {
               ?>
               <option value="<?php echo $major->id ?>">
                 <?php echo $major->id . " - " . $major->name ?>
               </option>
               <?php
-            } else {
-              foreach ($wishList as $wish) {
-                if ($major->id != $wish->majorId) {
-                  ?>
-                  <option value="<?php echo $major->id ?>">
-                    <?php echo $major->id . " - " . $major->name ?>
-                  </option>
-                  <?php
-                }
-              }
             }
           }
           ?>
@@ -163,7 +174,7 @@
         foreach ($wishList as $wish) {
           $major = MajorCtrl::getMajorById($wish->majorId);
 
-          ?> { wishId: <?php echo $wish->id ?>, majorName: '<?php echo $major->name ?>', pass: <?php echo empty($wish->pass) ? "null" : $wish->pass ?> },
+          ?> { wishId: <?php echo $wish->id ?>, majorId: <?php echo $major->id ?>, majorName: '<?php echo $major->name ?>', pass: <?php echo empty($wish->pass) ? "null" : $wish->pass ?> },
           <?php
         }
         ?>
@@ -173,14 +184,15 @@
         return `
           <tr>
             <td>${index + 1}</td>
-            <td>${item.wishId}</td>
+            <td>${item.majorId}</td>
             <td>${item.majorName}</td>
             <td>${item.pass === null ? "Chờ xét duyệt" : (item.pass ? "Đỗ" : "Trượt")}</td>
             <td>
-              <form action="/wishlist.php" method="post">
+              <form action="/student/wishlist.php" method="post">
                 <input type="hidden" name="wishId" value="${item.wishId}"/>
-                <button class="btn btn-danger" type="submit" name="deleteWish">Xoá</button>
+                <button class="btn btn-danger" type="submit" name="deleteWish" ${item.pass === null ? "" : "disabled"}>Xoá</button>
               </form>
+            </td>
           </tr>`;
       }
 

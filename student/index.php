@@ -38,6 +38,13 @@
   } else {
     $majorList = MajorCtrl::getMajorList();
   }
+
+  require_once "../core/UserCtrl.php";
+  require_once "../core/StudentCtrl.php";
+  require_once "../core/WishCtrl.php";
+
+  $currentUser = UserCtrl::getCurrentUser();
+  $studentProfile = StudentCtrl::getStudentByUserId($currentUser->id);
   ?>
 
   <nav class="fixed-top navbar navbar-expand-lg bg-primary-subtle shadow-sm">
@@ -132,12 +139,10 @@
       const majorList = [
         <?php
         foreach ($majorList as $major) {
-          echo "{ majorId: " . $major->id . ", majorName: '" . $major->name . "', score: " . $major->score . " },";
+          $studentHasWish = WishCtrl::studentHasWish($studentProfile->id, $major->id);
+          echo "{ majorId: " . $major->id . ", majorName: '" . $major->name . "', score: " . $major->score . ", studentHas: " . ($studentHasWish ? 1 : 0) . " },";
         }
         ?>
-        // { majorId: 7480201, majorName: 'Công nghệ thông tin', score: 21 },
-        // { majorId: 7580201, majorName: 'Kỹ thuật Xây dựng', score: 20.5 },
-        // { majorId: 7540101, majorName: 'Công nghệ thực phẩm', score: 20 },
       ];
 
       function createARow(index, item) {
@@ -148,10 +153,11 @@
             <td>${item.majorName}</td>
             <td>${item.score}</td>
             <td>
-              <form action="/wishlist.php" method="post">
+              <form action="/student/wishlist.php" method="post">
                 <input type="hidden" name="majorId" value="${item.majorId}"/>
-                <button class="btn btn-success" type="submit" name="addWish">Thêm vào NV</button>
+                <button class="btn btn-success" type="submit" name="addWish" ${item.studentHas === 1 ? "disabled" : ""} >Thêm vào NV</button>
               </form>
+            </td>
           </tr>`;
       }
 
