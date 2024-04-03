@@ -36,6 +36,12 @@ class UserCtrl
     return null;
   }
 
+  public static function addUser($email, $password, $admin): bool
+  {
+    $conn = new ConnDB();
+    return $conn->execute("INSERT INTO tb_users (email,password,admin) VALUES (?,?,?)", "ssi", $email, $password, $admin);
+  }
+
   public static function updateUser($id, $email, $password, $admin): bool
   {
     $conn = new ConnDB();
@@ -100,6 +106,15 @@ class UserCtrl
       return true;
     }
     return false;
+  }
+
+  public static function registerAsStudent($email, $password): bool
+  {
+    return UserCtrl::addUser($email, $password, false);
+  }
+  public static function registerAsAdmin($email, $password): bool
+  {
+    return UserCtrl::addUser($email, $password, true);
   }
 
   public static function logout()

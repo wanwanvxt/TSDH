@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Đăng nhập | Tuyển sinh đại học - Trường Đại học Công nghệ Đông Á</title>
+  <link rel="icon" type="image/x-icon" href="/assets/img/eaut_brand.webp">
   <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
   <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
 </head>
@@ -22,8 +23,7 @@
       $keepLogin = true;
     }
 
-    $isLoggedIn = UserCtrl::login($email, $password, $keepLogin);
-    if ($isLoggedIn) {
+    if (UserCtrl::login($email, $password, $keepLogin)) {
       header("location: /student");
       exit();
     } else {

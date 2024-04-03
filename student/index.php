@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tuyển sinh đại học - Trường Đại học Công nghệ Đông Á</title>
+  <link rel="icon" type="image/x-icon" href="/assets/img/eaut_brand.webp">
   <link rel="stylesheet" href="/assets/bootstrap/bootstrap.min.css" />
   <script src="/assets/bootstrap/bootstrap.bundle.min.js"></script>
   <script src="/assets/jquery/jquery-3.7.1.min.js"></script>
@@ -139,7 +140,10 @@
       const majorList = [
         <?php
         foreach ($majorList as $major) {
-          $studentHasWish = WishCtrl::studentHasWish($studentProfile->id, $major->id);
+          $studentHasWish = false;
+          if ($studentProfile !== null) {
+            $studentHasWish = WishCtrl::studentHasWish($studentProfile->id, $major->id);
+          }
           echo "{ majorId: " . $major->id . ", majorName: '" . $major->name . "', score: " . $major->score . ", studentHas: " . ($studentHasWish ? 1 : 0) . " },";
         }
         ?>
