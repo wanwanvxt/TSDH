@@ -5,7 +5,7 @@ class MajorCtrl
   /**
    * @return array<Major>
    */
-  public static function getMajorList($search = ""): array
+  public static function getMajorList($search = ""): array|null
   {
     $majorList = array();
 

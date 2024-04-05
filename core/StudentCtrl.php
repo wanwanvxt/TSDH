@@ -14,13 +14,13 @@ class StudentCtrl
     return null;
   }
 
-  public static function addStudent($name, $gender, $birthdate, $address, $school, $citizenId, $transcript, $userId)
+  public static function addStudent($name, $gender, $birthdate, $address, $school, $citizenId, $transcript, $userId): bool
   {
     $conn = new ConnDB();
     return $conn->execute("INSERT INTO tb_students (name,gender,birthdate,address,school,citizenId,transcript,userId) VALUES (?,?,?,?,?,?,?,?)", "sisssssi", $name, $gender, $birthdate, $address, $school, $citizenId, $transcript, $userId);
   }
 
-  public static function updateStudent($name, $gender, $birthdate, $address, $school, $citizenId, $transcript, $userId)
+  public static function updateStudent($name, $gender, $birthdate, $address, $school, $citizenId, $transcript, $userId): bool
   {
     $conn = new ConnDB();
     return $conn->execute("UPDATE tb_students SET name=? , gender=?, birthdate=?, address=?, school=?, citizenId=?, transcript=?, userId?", "sisssssi", $name, $gender, $birthdate, $address, $school, $citizenId, $transcript, $userId);
